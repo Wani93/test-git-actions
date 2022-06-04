@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: '/<repository name>/',
+  publicPath: 'test-git-actions',
   outputDir: 'dist'
 }
