@@ -24,4 +24,4 @@ runs:
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
         -H "Content-Type: application/json" \
-        --data-binary '{"body":"PizzaHouse '"${GITHUB_REPOSITORY}"'"}'
+        --data-binary '{"body":"PizzaHouse \"${GITHUB_REPOSITORY}\""}'
