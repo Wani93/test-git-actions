@@ -29,3 +29,16 @@ jobs:
         if: ${{ always() }}
       - run: npm run build
         if: ${{ always() }}
+
+      - name: Send jandi when failed
+        if: ${{ failure() }}
+        uses: ./.github/actions/jandi-notify
+        with:
+          jandi_incoming_url: ${{ secrets.JANDI_INCOMING_URL }}
+
+      - name: Send jandi if completed
+        if: ${{ success() }}
+        uses: ./.github/actions/jandi-notify
+        with:
+          status: success
+          jandi_incoming_url: ${{ secrets.JANDI_INCOMING_URL }}
