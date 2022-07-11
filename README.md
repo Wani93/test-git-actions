@@ -1,4 +1,4 @@
-# test-git-actions
+# test-git-actions TEST
 
 ## Project setup
 ```
