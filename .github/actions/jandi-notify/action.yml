@@ -24,5 +24,5 @@ runs:
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
         -H "Content-Type: application/json" \
-        --data-binary "{"body":"[[PizzaHouse]](http://url_to_text) You have a new Pizza order.","connectColor":"#FAC11B","connectInfo":[{"title":"Topping","description":"Pepperoni"},
-        {"title":"Location","description":"${MSG}","imageUrl":"Url_to_text"}]}"
+        --data-binary '{"body":"[[PizzaHouse]](http://url_to_text) You have a new Pizza order.","connectColor":"#FAC11B","connectInfo":[{"title":"Topping","description":"Pepperoni"},
+        {"title":"Location","description":"Empire State Building, 5th Ave, New York","imageUrl":"Url_to_text"}]}'
