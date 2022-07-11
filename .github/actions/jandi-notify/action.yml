@@ -18,9 +18,11 @@ runs:
         else
           EMOTICON="❌"
         fi
-
+        
+        COMMIT-MESSAGE=${{ github.event.head_commit.message }}
+        
         curl \
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
         -H "Content-Type: application/json" \
-        --data-binary '{"body":"📢 EVUI CI/CD Notipication - ✅ Deployment succeeded", "connectColor":"#3C81F6", "connectInfo":[{"title":"Commit Messages","description":'"${github.event.head_commit.message}"'},{"title":"Github Pages","description":"- [[EVUI]](https://ex-em.github.io/EVUI)"}]}'
+        --data-binary '{"body":"📢 EVUI CI/CD Notipication - ✅ Deployment succeeded", "connectColor":"#3C81F6", "connectInfo":[{"title":"Commit Message","description":"- '"${COMMIT-MESSAGE}"'"},{"title":"Github Pages","description":"- [[EVUI]](https://ex-em.github.io/EVUI)"}]}'
