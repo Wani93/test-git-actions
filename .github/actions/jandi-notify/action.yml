@@ -14,15 +14,16 @@ runs:
       shell: bash
       run: |
         if [ "${{ inputs.status }}" = "success" ]; then
-          EMOTICON="✅"
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          curl \
+          -X POST "${{ inputs.jandi_incoming_url }}" \
+          -H "Accept: application/vnd.tosslab.jandi-v2+json" \
+          -H "Content-Type: application/json" \
+          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ✅ Deployment succeeded", "connectColor":"#4285F6", "connectInfo":[{"title":"Commit Message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"EVUI Document","description":"- [[EVUI]](https://ex-em.github.io/EVUI)"}]}'
         else
-          EMOTICON="❌"
+          curl \
+          -X POST "${{ inputs.jandi_incoming_url }}" \
+          -H "Accept: application/vnd.tosslab.jandi-v2+json" \
+          -H "Content-Type: application/json" \
+          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Error Log","description":"- [Workflow](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}|${GITHUB_WORKFLOW})"}]}'
         fi
-        
-        COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-        
-        curl \
-        -X POST "${{ inputs.jandi_incoming_url }}" \
-        -H "Accept: application/vnd.tosslab.jandi-v2+json" \
-        -H "Content-Type: application/json" \
-        --data-binary '{"body":"📢 EVUI CI/CD Notipication - '"${EMOTICON}"' Deployment succeeded", "connectColor":"#3C81F6", "connectInfo":[{"title":"Commit Message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"Github Pages","description":"- [[EVUI]](https://ex-em.github.io/EVUI)"}]}'
