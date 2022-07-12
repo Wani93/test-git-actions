@@ -13,8 +13,9 @@ runs:
     - name: Send jandi
       shell: bash
       run: |
-        if [ "${{ inputs.status }}" = "success" ]; then
-          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+        COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+
+        if [ "${{ inputs.status }}" = "success" ]; then          
           curl \
           -X POST "${{ inputs.jandi_incoming_url }}" \
           -H "Accept: application/vnd.tosslab.jandi-v2+json" \
@@ -25,5 +26,5 @@ runs:
           -X POST "${{ inputs.jandi_incoming_url }}" \
           -H "Accept: application/vnd.tosslab.jandi-v2+json" \
           -H "Content-Type: application/json" \
-          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Error Log","description":"- [Workflow](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}|${GITHUB_WORKFLOW})"}]}'
+          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit Message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"Error Log","description":"- [[Workflow]](https://github.com/'"${GITHUB_REPOSITORY}"'/actions/runs/'"${GITHUB_RUN_ID}"'|'"${GITHUB_WORKFLOW}"')"}]}'
         fi
