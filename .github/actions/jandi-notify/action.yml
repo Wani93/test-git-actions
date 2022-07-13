@@ -19,7 +19,7 @@ runs:
         COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
         
         curl \
-        -X POST https://wh.jandi.com/connect-api/webhook/11671944/9adfceb802c541e262485afe65f41313 \
+        -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
         -H "Content-Type: application/json" \
-        --data-binary '{"body":"📢 EVUI CI/CD Notification - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"Error log","description":"- [[Workflow]](https://github.com/'"${GITHUB_REPOSITORY}"'/actions/runs/'"${GITHUB_RUN_ID}"')"}]}'
+        --data-binary '{"body":"📢 EVUI CI/CD Notification - ⛔ Deployment failed", "connectColor":"#FF4C15"}'
