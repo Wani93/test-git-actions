@@ -6,7 +6,7 @@ inputs:
     description: CI/CD status
     default: 'failure'
   jandi_incoming_url:
-    description: jandi webhook url
+    description: jandi webhook URL
     required: true
 
 description: jandi notify action
