@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.14.2
-          cache: 'npm'
+          cache: npm
 
       - run: npm run lint
       - run: npm run build
