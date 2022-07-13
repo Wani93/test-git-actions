@@ -16,7 +16,7 @@ runs:
     - name: Send jandi
       shell: bash
       run: |
-        COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+        COMMIT_MESSAGE="${{ github.event.head_commit.message }}@q"
         
         curl \
         -X POST "${{ inputs.jandi_incoming_url }}" \
