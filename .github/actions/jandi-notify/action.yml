@@ -3,10 +3,13 @@ name: 'jandi-notify'
 inputs:
   status:
     required: false
+    description: CI/CD status
     default: 'failure'
   jandi_incoming_url:
+    description: jandi webhook url
     required: true
 
+description: jandi notify action
 runs:
   using: 'composite'
   steps:
@@ -20,11 +23,11 @@ runs:
           -X POST "${{ inputs.jandi_incoming_url }}" \
           -H "Accept: application/vnd.tosslab.jandi-v2+json" \
           -H "Content-Type: application/json" \
-          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ✅ Deployment succeeded", "connectColor":"#4285F6", "connectInfo":[{"title":"Commit Message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"EVUI Document","description":"- [[EVUI]](https://ex-em.github.io/EVUI)"}]}'
+          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ✅ Deployment succeeded", "connectColor":"#4285F6", "connectInfo":[{"title":"Commit message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"EVUI document","description":"- [[EVUI]](https://ex-em.github.io/EVUI)"}]}'
         else
           curl \
           -X POST "${{ inputs.jandi_incoming_url }}" \
           -H "Accept: application/vnd.tosslab.jandi-v2+json" \
           -H "Content-Type: application/json" \
-          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit Message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"Error Log","description":"- [[Workflow]](https://github.com/'"${GITHUB_REPOSITORY}"'/actions/runs/'"${GITHUB_RUN_ID}"'|'"${GITHUB_WORKFLOW}"')"}]}'
+          --data-binary '{"body":"📢 EVUI CI/CD Notipication - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit message","description":"- '"${COMMIT_MESSAGE}"'"},{"title":"Error log","description":"- [[Workflow]](https://github.com/'"${GITHUB_REPOSITORY}"'/actions/runs/'"${GITHUB_RUN_ID}"'|'"${GITHUB_WORKFLOW}"')"}]}'
         fi
