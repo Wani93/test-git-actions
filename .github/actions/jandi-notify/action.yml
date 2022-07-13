@@ -17,7 +17,7 @@ runs:
       shell: bash
       run: |
         RAW_COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-        COMMIT_MESSAGE="${RAW_COMMIT_MESSAGE@Q}"        
+        COMMIT_MESSAGE="${RAW_COMMIT_MESSAGE}"        
         curl \
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
