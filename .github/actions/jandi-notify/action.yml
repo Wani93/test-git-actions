@@ -20,4 +20,4 @@ runs:
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
         -H "Content-Type: application/json" \
-        --data-binary '{"body":"📢 EVUI CI/CD Notification - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit message","description":"- '"${{github.event.head_commit.message}}"'"}]}'
+        --data-binary '{"body":"📢 EVUI CI/CD Notification - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit message","description":"- '"${github.event.head_commit.message}"'"}]}'
