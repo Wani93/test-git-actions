@@ -17,9 +17,10 @@ runs:
       shell: bash
       run: |
         RAW_COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-        COMMIT_MESSAGE="${RAW_COMMIT_MESSAGE@Q}"        
+        COMMIT_MESSAGE="$(echo ${RAW_COMMIT_MESSAGE@Q} | tr -d "$'")"
+        
         curl \
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
         -H "Content-Type: application/json" \
-        --data-ascii '{"body":"📢 EVUI CI/CD Notification - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit message","description":"- '"${COMMIT_MESSAGE}"'"}]}'
+        --data-binary '{"body":"📢 EVUI CI/CD Notification - ⛔ Deployment failed", "connectColor":"#FF4C15", "connectInfo":[{"title":"Commit message","description":"- '"${COMMIT_MESSAGE}"'"}]}'
