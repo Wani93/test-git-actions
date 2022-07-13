@@ -16,7 +16,7 @@ runs:
     - name: Send jandi
       shell: bash
       run: |
-        COMMIT_MESSAGE="${{ github.event.head_commit.message }}@Q"
+        COMMIT_MESSAGE="${{ github.event.head_commit.message }}"@Q
         curl \
         -X POST "${{ inputs.jandi_incoming_url }}" \
         -H "Accept: application/vnd.tosslab.jandi-v2+json" \
